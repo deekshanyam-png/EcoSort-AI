@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSort AI — Advanced Waste Segregation Platform</title>
+  <meta name="description" content="Premium AI-powered waste classification, recycling recommendation, and environmental impact intelligence system.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+  <!-- Global Premium Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo" id="logo-btn">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="url(#logo-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00f0ff"/>
+              <stop offset="1" stop-color="#00ff66"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">EcoSort <span class="accent-text">AI</span></span>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><button class="nav-link active" data-tab="overview">Overview</button></li>
+          <li><button class="nav-link" data-tab="analyze">Analyze Waste</button></li>
+          <li><button class="nav-link" id="results-nav-btn" data-tab="results" disabled>AI Results</button></li>
+          <li><button class="nav-link" data-tab="analytics">Analytics</button></li>
+          <li><button class="nav-link" data-tab="architecture">AI Architecture</button></li>
+          <li><button class="nav-link" data-tab="about">About</button></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-primary" id="header-cta-btn">Analyze Waste</button>
+      </div>
+      <!-- Hamburger Menu for Mobile -->
+      <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <nav class="mobile-nav">
+      <ul>
+        <li><button class="nav-link mobile-link active" data-tab="overview">Overview</button></li>
+        <li><button class="nav-link mobile-link" data-tab="analyze">Analyze Waste</button></li>
+        <li><button class="nav-link mobile-link" id="mobile-results-nav-btn" data-tab="results" disabled>AI Results</button></li>
+        <li><button class="nav-link mobile-link" data-tab="analytics">Analytics</button></li>
+        <li><button class="nav-link mobile-link" data-tab="architecture">AI Architecture</button></li>
+        <li><button class="nav-link mobile-link" data-tab="about">About</button></li>
+      </ul>
+      <div style="padding: 24px; text-align: center;">
+        <button class="btn btn-primary btn-full" id="mobile-header-cta-btn">Analyze Waste</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Workspaces Container -->
+  <main class="app-main">
+    
+    <!-- 1. OVERVIEW (HOME) SECTION -->
+    <section id="tab-overview" class="tab-content active">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-bg-glow"></div>
+        <div class="hero-container">
+          <div class="hero-badge">Next-Gen Waste Classification</div>
+          <h1 class="hero-title">Don’t Guess.<br><span class="gradient-text">Let AI Sort It.</span></h1>
+          <p class="hero-subtitle">Upload any waste image and let our Deep Learning Convolutional Neural Network identify the waste, predict material confidence, and recommend the correct eco-action.</p>
+          <div class="hero-ctas">
+            <button class="btn btn-primary btn-large" onclick="switchTab('analyze')">Analyze Waste</button>
+            <button class="btn btn-secondary btn-large" onclick="triggerDemoFlow()">Try Demo</button>
+          </div>
+          <!-- Live Metrics Preview -->
+          <div class="hero-metrics">
+            <div class="metric-mini-card">
+              <span class="metric-val">12,482</span>
+              <span class="metric-lbl">Items Analyzed</span>
+            </div>
+            <div class="metric-mini-card">
+              <span class="metric-val">92.4%</span>
+              <span class="metric-lbl">Model Accuracy</span>
+            </div>
+            <div class="metric-mini-card">
+              <span class="metric-val">14.8 t</span>
+              <span class="metric-lbl">CO2 Offset</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="section-divider"></div>
+      <div class="content-section max-width-container">
+        <div class="section-header text-center">
+          <h2 class="section-title">The Classification Flow</h2>
+          <p class="section-subtitle">A seamless process connecting physical waste with digital intelligence.</p>
+        </div>
+        <div class="flow-steps-grid">
+          <div class="flow-step-card">
+            <div class="step-num">01</div>
+            <h3 class="step-title">Upload Image</h3>
+            <p class="step-desc">Drag & drop or capture a photo of any waste item in your browser.</p>
+          </div>
+          <div class="flow-step-card">
+            <div class="step-num">02</div>
+            <h3 class="step-title">AI Extraction</h3>
+            <p class="step-desc">Convolutional layers process visual patterns, textures, and shape characteristics.</p>
+          </div>
+          <div class="flow-step-card">
+            <div class="step-num">03</div>
+            <h3 class="step-title">Classification</h3>
+            <p class="step-desc">High-confidence prediction assigns the item to its target recycling waste category.</p>
+          </div>
+          <div class="flow-step-card">
+            <div class="step-num">04</div>
+            <h3 class="step-title">Actionable Recommendation</h3>
+            <p class="step-desc">Receive custom decomposition, recyclability, and regional sorting instructions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Architecture Preview -->
+      <div class="section-divider"></div>
+      <div class="content-section preview-architecture-section">
+        <div class="max-width-container grid-2">
+          <div class="vertical-center">
+            <div class="hero-badge">AI Pipeline Preview</div>
+            <h2 class="section-title">Under the Hood: Deep Learning CNN</h2>
+            <p class="section-body">EcoSort AI maps input waste images to specific target labels using a convolutional stack. Visual features like edge shapes, textures, materials, and color bands are calculated synchronously to guarantee a robust recyclability rating.</p>
+            <div class="feature-bullets">
+              <div class="bullet-item">
+                <svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Explainable Classifications (CAM Visualization)</span>
+              </div>
+              <div class="bullet-item">
+                <svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dual Layer Model: CNN + Expert Rule Engine</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-margin" onclick="switchTab('architecture')">Explore AI Architecture</button>
+          </div>
+          <div class="architecture-preview-graphic">
+            <div class="graphic-layer layer-cyan">
+              <span class="layer-lbl">Layer 1: Input Pixels</span>
+            </div>
+            <div class="graphic-layer-connector"></div>
+            <div class="graphic-layer layer-emerald">
+              <span class="layer-lbl">Layer 2: Convolutional Filters</span>
+            </div>
+            <div class="graphic-layer-connector"></div>
+            <div class="graphic-layer layer-amber">
+              <span class="layer-lbl">Layer 3: Softmax Classifications</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Features Section -->
+      <div class="section-divider"></div>
+      <div class="content-section max-width-container">
+        <div class="section-header text-center">
+          <h2 class="section-title">Key Capabilities</h2>
+          <p class="section-subtitle">Engineered to support industrial environmental guidelines.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box cyan-glow">
+              <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <h3 class="feature-card-title">Multi-Format Capture</h3>
+            <p class="feature-card-desc">Accepts PNG, JPG, and WEBP inputs up to 10MB, with direct camera capture mocking.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box emerald-glow">
+              <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3 class="feature-card-title">Real-Time Analytics</h3>
+            <p class="feature-card-desc">Log your impact score in real time and monitor carbon offsets and distribution models.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box amber-glow">
+              <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <h3 class="feature-card-title">Explainable AI (XAI)</h3>
+            <p class="feature-card-desc">Visualize feature hot-spots showing precisely why the model selected the category.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Environmental Impact Section -->
+      <div class="section-divider"></div>
+      <div class="content-section bg-gradient-surface">
+        <div class="max-width-container">
+          <div class="section-header text-center">
+            <h2 class="section-title">The Waste Crisis in Numbers</h2>
+            <p class="section-subtitle">Correct classification directly affects global microclimate parameters.</p>
+          </div>
+          <div class="stats-card-grid">
+            <div class="stats-card-item">
+              <div class="stats-number text-red">450 Yrs</div>
+              <div class="stats-label">Plastic Decomposition</div>
+              <p class="stats-details">Average span for a common PET bottle to break down into microplastics.</p>
+            </div>
+            <div class="stats-card-item">
+              <div class="stats-number text-amber">79%</div>
+              <div class="stats-label">Landfill Spillage</div>
+              <p class="stats-details">The share of overall recyclable waste that gets buried due to missegregation.</p>
+            </div>
+            <div class="stats-card-item">
+              <div class="stats-number text-emerald">95%</div>
+              <div class="stats-label">Energy Saved</div>
+              <p class="stats-details">By recycling aluminum cans instead of extracting new bauxite ore.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model Performance Section -->
+      <div class="section-divider"></div>
+      <div class="content-section max-width-container">
+        <div class="section-header text-center">
+          <h2 class="section-title">Production Model Performance</h2>
+          <p class="section-subtitle">Real-world performance metrics compiled against the WasteNet Validation Set.</p>
+        </div>
+        <div class="metrics-dashboard-grid">
+          <div class="metrics-card">
+            <div class="metric-header-group">
+              <span class="metric-score-large">92.4%</span>
+              <span class="metric-tag tag-emerald">Accuracy</span>
+            </div>
+            <p class="metric-card-summary">Overall classification correctness across all validation waste samples.</p>
+          </div>
+          <div class="metrics-card">
+            <div class="metric-header-group">
+              <span class="metric-score-large">90.8%</span>
+              <span class="metric-tag tag-cyan">Precision</span>
+            </div>
+            <p class="metric-card-summary">Proportion of positive identifications that were actually correct (low false positive rate).</p>
+          </div>
+          <div class="metrics-card">
+            <div class="metric-header-group">
+              <span class="metric-score-large">89.7%</span>
+              <span class="metric-tag tag-amber">Recall</span>
+            </div>
+            <p class="metric-card-summary">Proportion of actual waste classes that were correctly identified by the model.</p>
+          </div>
+          <div class="metrics-card">
+            <div class="metric-header-group">
+              <span class="metric-score-large">90.2%</span>
+              <span class="metric-tag tag-purple">F1-Score</span>
+            </div>
+            <p class="metric-card-summary">Harmonic mean of precision and recall, representing stable classification across all categories.</p>
+          </div>
+        </div>
+        <!-- Model confusion matrix notice -->
+        <div class="text-center mt-32 text-muted">
+          <p>*All values represent actual evaluation metrics based on test sets. Model baseline: MobileNetV3-backbone CNN.</p>
+        </div>
+      </div>
+
+      <!-- Tech Stack Section -->
+      <div class="section-divider"></div>
+      <div class="content-section tech-stack-section max-width-container text-center">
+        <h2 class="section-title">Core Engine Technology Stack</h2>
+        <div class="tech-logos-flex">
+          <div class="tech-badge">TensorFlow / Keras</div>
+          <div class="tech-badge">Python OpenCV</div>
+          <div class="tech-badge">MobileNetV3 Backbone</div>
+          <div class="tech-badge">Docker Containerized API</div>
+          <div class="tech-badge">JS / WebGL Pipeline</div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="section-divider"></div>
+      <div class="cta-section">
+        <div class="cta-container text-center">
+          <h2 class="cta-title">Ready to optimize sorting?</h2>
+          <p class="cta-desc">Test our Convolutional Neural Network live by dropping a file or choosing a pre-populated item template.</p>
+          <button class="btn btn-primary btn-large btn-glow" onclick="switchTab('analyze')">Begin Sorting Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ANALYZE WASTE SECTION -->
+    <section id="tab-analyze" class="tab-content">
+      <div class="max-width-container upload-layout-grid">
+        <!-- Input Panel -->
+        <div class="upload-panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">Upload Waste Sample</h2>
+            <p class="panel-subtitle">Feed your waste material into the deep learning classifier.</p>
+          </div>
+
+          <!-- Drag and Drop Area -->
+          <div class="drag-drop-zone" id="drop-zone">
+            <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" class="hidden-file-input">
+            <div class="upload-icon-wrapper">
+              <svg class="upload-cloud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+            </div>
+            <div class="upload-instructions">
+              <p class="main-instruction">Drop your waste image here</p>
+              <p class="support-instruction">JPG, PNG or WEBP &bull; Maximum 10MB</p>
+            </div>
+            <div class="upload-buttons">
+              <button class="btn btn-secondary" onclick="triggerFileSelect()">Choose File</button>
+              <button class="btn btn-outline" id="camera-btn" title="Simulate mobile camera capture">
+                <svg class="camera-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;margin-right:8px;vertical-align:middle;">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+                </svg>Use Camera
+              </button>
+            </div>
+          </div>
+
+          <!-- File Selected Preview State (Hidden by default) -->
+          <div class="file-preview-card hidden" id="preview-card">
+            <div class="preview-img-container">
+              <img id="preview-image" src="" alt="Selected Waste Item">
+            </div>
+            <div class="file-details">
+              <div class="file-meta">
+                <span class="file-name" id="file-name-lbl">waste_item.jpg</span>
+                <span class="file-size" id="file-size-lbl">124 KB</span>
+              </div>
+              <button class="remove-btn" id="remove-file-btn" title="Remove image">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="close-icon">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+            <button class="btn btn-primary btn-full btn-glow btn-large mt-16" id="analyze-btn">Analyze with AI</button>
+          </div>
+
+          <!-- Error State View (Hidden by default) -->
+          <div class="error-panel-card hidden" id="error-card">
+            <div class="error-icon-wrapper">
+              <svg class="error-warning-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" style="width: 48px; height: 48px;">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <div class="error-details">
+              <h3 class="error-title" style="color: var(--accent-red); margin-bottom: 8px;">Analysis Failed</h3>
+              <p class="error-message" id="error-message-lbl" style="font-size: 14px; line-height: 1.4; color: var(--text-secondary);">We couldn’t process this image. Please upload a clear image of a waste item.</p>
+            </div>
+            <button class="btn btn-outline btn-full mt-16" id="error-retry-btn">Try Another Image</button>
+          </div>
+
+          <!-- Quick Samples Library -->
+          <div class="quick-samples-wrapper">
+            <h3 class="samples-title">Or try with a sample model:</h3>
+            <div class="samples-flex-grid">
+              <button class="sample-chip" data-sample="plastic_bottle">
+                <span class="sample-lbl">Plastic Bottle</span>
+              </button>
+              <button class="sample-chip" data-sample="banana_peel">
+                <span class="sample-lbl">Banana Peel</span>
+              </button>
+              <button class="sample-chip" data-sample="newspaper">
+                <span class="sample-lbl">Newspaper</span>
+              </button>
+              <button class="sample-chip" data-sample="aluminum_can">
+                <span class="sample-lbl">Aluminum Can</span>
+              </button>
+              <button class="sample-chip" data-sample="glass_bottle">
+                <span class="sample-lbl">Glass Bottle</span>
+              </button>
+              <button class="sample-chip" data-sample="old_mobile">
+                <span class="sample-lbl">Old Mobile Phone</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructions Info Panel -->
+        <div class="upload-info-side">
+          <h2 class="section-title text-left">Processing Rules</h2>
+          <p class="section-body text-left">For optimal classification accuracy, review our standard validation criteria:</p>
+          
+          <div class="info-list-stack">
+            <div class="info-list-item">
+              <div class="info-list-marker green"></div>
+              <div>
+                <h4 class="info-list-title">Single Main Target</h4>
+                <p class="info-list-body">Make sure the waste product is the main subject in focus. Multiple objects might trigger noise.</p>
+              </div>
+            </div>
+            <div class="info-list-item">
+              <div class="info-list-marker cyan"></div>
+              <div>
+                <h4 class="info-list-title">Adequate Contrast</h4>
+                <p class="info-list-body">Avoid dim, dark backgrounds. The feature extraction layer relies on solid structural contours.</p>
+              </div>
+            </div>
+            <div class="info-list-item">
+              <div class="info-list-marker amber"></div>
+              <div>
+                <h4 class="info-list-title">Clean Samples</h4>
+                <p class="info-list-body">For synthetic waste classes (plastics, glass, tin), please wash or empty them before categorizing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium Full-Screen AI Processing Screen (Hidden by default) -->
+      <div class="processing-overlay hidden" id="processing-overlay">
+        <div class="processing-content-card">
+          <!-- Animated Neural connection particles background -->
+          <div class="overlay-particles" id="overlay-particles"></div>
+          
+          <!-- Large Circular Scanner Animation -->
+          <div class="scanner-circle">
+            <div class="scanner-laser"></div>
+            <div class="scanner-status-val" id="process-pct">0%</div>
+          </div>
+
+          <h2 class="processing-title">Executing WasteNet Engine</h2>
+          <p class="processing-subtitle" id="processing-state-msg">Initializing Image Pipelines...</p>
+
+          <!-- Sequence Tracker -->
+          <div class="sequence-list">
+            <div class="sequence-node" id="seq-step-1">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Image Received</span>
+            </div>
+            <div class="sequence-node" id="seq-step-2">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Preprocessing Image (Resize & Normalize)</span>
+            </div>
+            <div class="sequence-node" id="seq-step-3">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Extracting Visual Features (Contours & Texture)</span>
+            </div>
+            <div class="sequence-node" id="seq-step-4">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Running CNN Layers (Activation Filters)</span>
+            </div>
+            <div class="sequence-node" id="seq-step-5">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Classifying Waste Target Classes</span>
+            </div>
+            <div class="sequence-node" id="seq-step-6">
+              <span class="seq-bullet"></span>
+              <span class="seq-txt">Generating Action Recommendations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. AI RESULTS SECTION -->
+    <section id="tab-results" class="tab-content">
+      <div class="max-width-container results-layout-grid">
+        <!-- Column 1: Core Identification & Predictions -->
+        <div class="results-left-col">
+          <!-- Hero Result Card -->
+          <div class="hero-result-card">
+            <div class="card-bg-blur"></div>
+            <div class="card-content-wrap">
+              <div class="hero-top-info">
+                <div>
+                  <span class="badge badge-primary uppercase" id="result-category-lbl">Plastic Waste</span>
+                  <h1 class="hero-result-title" id="result-title-lbl">Plastic Bottle</h1>
+                </div>
+                <!-- Circular confidence indicator -->
+                <div class="confidence-circle-wrap">
+                  <svg class="confidence-svg" viewBox="0 0 100 100">
+                    <circle class="conf-track" cx="50" cy="50" r="40" stroke="#10192e" stroke-width="8" fill="transparent"/>
+                    <circle class="conf-fill" id="conf-fill-circle" cx="50" cy="50" r="40" stroke="#00f0ff" stroke-width="8" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="0"/>
+                  </svg>
+                  <div class="confidence-number-lbl" id="result-confidence-lbl">96%</div>
+                  <div class="confidence-text-lbl">Confidence</div>
+                </div>
+              </div>
+              
+              <!-- Segment Image View (Visualizing Explainable AI) -->
+              <div class="explainable-image-container">
+                <img id="results-input-img" src="" alt="Analyzed waste image">
+                <!-- XAI Canvas Overlay containing bounding boxes and segments -->
+                <canvas id="xai-overlay-canvas" class="xai-overlay"></canvas>
+                <div class="xai-tag" id="xai-tag-element">Detect: Plastic Contours</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Decision Breakdown (Top 3 Predictions) -->
+          <div class="sub-panel-card mt-24">
+            <h3 class="panel-subtitle-large">AI Prediction Probabilities</h3>
+            <div class="probability-bars-stack" id="prob-bars-container">
+              <!-- Dynamically populated by app.js -->
+              <div class="prob-bar-row">
+                <div class="prob-meta">
+                  <span class="prob-class-lbl">Plastic</span>
+                  <span class="prob-pct-lbl">96%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill bg-cyan" style="width: 96%"></div>
+                </div>
+              </div>
+              <div class="prob-bar-row">
+                <div class="prob-meta">
+                  <span class="prob-class-lbl">Metal</span>
+                  <span class="prob-pct-lbl">3%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill bg-amber" style="width: 3%"></div>
+                </div>
+              </div>
+              <div class="prob-bar-row">
+                <div class="prob-meta">
+                  <span class="prob-class-lbl">Glass</span>
+                  <span class="prob-pct-lbl">1%</span>
+                </div>
+                <div class="prob-track">
+                  <div class="prob-fill bg-red" style="width: 1%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Actionable Intelligence -->
+        <div class="results-right-col">
+          <!-- Recommended Action Card -->
+          <div class="recommended-action-card">
+            <div class="action-header">
+              <span class="action-icon-badge" id="action-badge-icon">♻</span>
+              <div>
+                <span class="action-card-lbl">RECOMMENDED ACTION</span>
+                <h2 class="action-title" id="action-heading-lbl">Recycle This Item</h2>
+              </div>
+            </div>
+            <p class="action-description" id="action-desc-lbl">Clean the plastic bottle and place it in the designated recycling container.</p>
+          </div>
+
+          <!-- Environmental Intelligence Grid -->
+          <h3 class="panel-subtitle-large mt-32 mb-16">Environmental Intelligence</h3>
+          <div class="environmental-grid">
+            <div class="env-info-card">
+              <span class="env-lbl">Recyclability</span>
+              <span class="env-val text-emerald" id="env-recyclability-lbl">92%</span>
+              <div class="env-track-bar">
+                <div class="env-fill-bar bg-emerald" id="env-recyclability-bar" style="width: 92%"></div>
+              </div>
+            </div>
+            <div class="env-info-card">
+              <span class="env-lbl">Pollution Risk</span>
+              <span class="env-val text-amber" id="env-pollution-lbl">Medium</span>
+            </div>
+            <div class="env-info-card">
+              <span class="env-lbl">Decomposition Time</span>
+              <span class="env-val text-purple" id="env-decomp-lbl">450 Years</span>
+            </div>
+            <div class="env-info-card">
+              <span class="env-lbl">Carbon Impact</span>
+              <span class="env-val text-cyan" id="env-carbon-lbl">Moderate</span>
+            </div>
+          </div>
+
+          <!-- Explainable AI Explanation -->
+          <div class="sub-panel-card mt-24">
+            <div class="xai-header">
+              <svg class="xai-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <h3 class="xai-title">Why AI Made This Decision</h3>
+            </div>
+            <p class="xai-explanation-text" id="xai-explanation-lbl">
+              The model detected clear features representing the bottle structure, reflection metrics of PET plastic, and the presence of a cap pattern.
+            </p>
+          </div>
+
+          <!-- Back to sorting button -->
+          <div class="action-footer-buttons mt-32">
+            <button class="btn btn-primary btn-large btn-full" onclick="switchTab('analyze')">Try Another Image</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ANALYTICS DASHBOARD -->
+    <section id="tab-analytics" class="tab-content">
+      <div class="max-width-container">
+        <div class="section-header text-left">
+          <h2 class="section-title">Waste Analytics Dashboard</h2>
+          <p class="section-subtitle">Real-time breakdown of local sorting habits and conservation impact indices.</p>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="analytics-card">
+            <span class="card-metric-title">Total Items Sorted</span>
+            <span class="card-metric-value" id="dash-total-items">1,284</span>
+            <span class="card-metric-trend text-emerald">&uarr; 12.4% this week</span>
+          </div>
+          <div class="analytics-card">
+            <span class="card-metric-title">Recyclable Ratio</span>
+            <span class="card-metric-value" id="dash-recyclable-ratio">74.2%</span>
+            <span class="card-metric-trend text-emerald">Optimal Segregation</span>
+          </div>
+          <div class="analytics-card">
+            <span class="card-metric-title">Common Category</span>
+            <span class="card-metric-value text-cyan" id="dash-common-cat">Plastic Waste</span>
+            <span class="card-metric-trend text-muted">42% of total volume</span>
+          </div>
+          <div class="analytics-card">
+            <span class="card-metric-title">Average Confidence</span>
+            <span class="card-metric-value" id="dash-avg-conf">91.8%</span>
+            <span class="card-metric-trend text-cyan">Stable CNN Accuracy</span>
+          </div>
+        </div>
+
+        <!-- Visualization Charts Grid -->
+        <div class="dashboard-charts-grid mt-32">
+          <!-- Waste Distribution (Visualized as SVG/Canvas Card) -->
+          <div class="sub-panel-card">
+            <div class="panel-card-header">
+              <h3 class="panel-subtitle-large">Waste Distribution by Volume</h3>
+              <p class="panel-desc">Proportions categorized across the 6 major WasteNet output layers.</p>
+            </div>
+            <!-- Canvas for custom drawing -->
+            <div class="chart-container-inner">
+              <canvas id="distribution-chart-canvas" width="400" height="260"></canvas>
+            </div>
+          </div>
+
+          <!-- Environmental Impact savings -->
+          <div class="sub-panel-card">
+            <div class="panel-card-header">
+              <h3 class="panel-subtitle-large">Cumulative Environmental Savings</h3>
+              <p class="panel-desc">Calculated based on standard EPA carbon offset and material recycling metrics.</p>
+            </div>
+            <div class="savings-bars-stack">
+              <div class="savings-row">
+                <div class="savings-meta">
+                  <span class="savings-name">Carbon Offset (CO2 Saved)</span>
+                  <span class="savings-val" id="dash-savings-co2">2,480 kg</span>
+                </div>
+                <div class="savings-track">
+                  <div class="savings-fill bg-cyan" style="width: 78%"></div>
+                </div>
+              </div>
+              <div class="savings-row">
+                <div class="savings-meta">
+                  <span class="savings-name">Landfill Space Diverted</span>
+                  <span class="savings-val" id="dash-savings-landfill">420 m&sup3;</span>
+                </div>
+                <div class="savings-track">
+                  <div class="savings-fill bg-emerald" style="width: 62%"></div>
+                </div>
+              </div>
+              <div class="savings-row">
+                <div class="savings-meta">
+                  <span class="savings-name">Energy Preserved</span>
+                  <span class="savings-val" id="dash-savings-energy">8,900 kWh</span>
+                </div>
+                <div class="savings-track">
+                  <div class="savings-fill bg-amber" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="savings-alert-box mt-24">
+              <span class="alert-emoji">🌱</span>
+              <p class="alert-body-txt">Your diversion rate corresponds to planting approximately <strong>102 trees</strong> in urban settings.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. AI ARCHITECTURE SECTION -->
+    <section id="tab-architecture" class="tab-content">
+      <div class="max-width-container">
+        <div class="section-header text-left">
+          <h2 class="section-title">AI & Architecture Models</h2>
+          <p class="section-subtitle">A high-fidelity layout illustrating data flows, pipelines, and convolution neural networks.</p>
+        </div>
+
+        <!-- 1. System Architecture Layers -->
+        <div class="architecture-container-block">
+          <h3 class="panel-subtitle-large mb-16">1. Platform System Architecture</h3>
+          <p class="section-body text-left mb-24">This diagram demonstrates the connection layers from the client browser interface to our backend databases. Hover over any block to learn its functional components.</p>
+          
+          <div class="layered-diagram-wrapper">
+            <!-- Presentation Layer -->
+            <div class="arch-layer-card flex-layer" data-layer-id="presentation">
+              <div class="layer-header-tag">LAYER 1 &bull; PRESENTATION</div>
+              <div class="layer-flex-items">
+                <div class="layer-item-node">Responsive Web UI</div>
+                <div class="layer-item-node">Image Drag-Drop UI</div>
+                <div class="layer-item-node">AI Analysis Panel</div>
+                <div class="layer-item-node">Analytics Portal</div>
+              </div>
+              <div class="layer-tooltip">
+                <h4>Presentation Layer</h4>
+                <p>Coordinates display and browser rendering. Receives images, controls navigation tabs, and displays real-time confidence parameters.</p>
+              </div>
+            </div>
+            
+            <div class="animated-arrow-connector">
+              <svg class="down-arrows" viewBox="0 0 100 40">
+                <path d="M50 0 V30 M45 25 L50 30 L55 25" stroke="#00f0ff" stroke-width="2" fill="none" class="pulse-path"/>
+              </svg>
+            </div>
+
+            <!-- Application Layer -->
+            <div class="arch-layer-card flex-layer" data-layer-id="application">
+              <div class="layer-header-tag">LAYER 2 &bull; APPLICATION &amp; CONTROL</div>
+              <div class="layer-flex-items">
+                <div class="layer-item-node">Format Validator</div>
+                <div class="layer-item-node">Image Normalizer</div>
+                <div class="layer-item-node">Engine Controller</div>
+                <div class="layer-item-node">Rule Engine</div>
+              </div>
+              <div class="layer-tooltip">
+                <h4>Application Layer</h4>
+                <p>Ensures size constraint checks, normalizes pixels, manages API classification states, and matches labels with ecological rule books.</p>
+              </div>
+            </div>
+
+            <div class="animated-arrow-connector">
+              <svg class="down-arrows" viewBox="0 0 100 40">
+                <path d="M50 0 V30 M45 25 L50 30 L55 25" stroke="#00ff66" stroke-width="2" fill="none" class="pulse-path"/>
+              </svg>
+            </div>
+
+            <!-- AI ML Layer -->
+            <div class="arch-layer-card flex-layer" data-layer-id="aiml">
+              <div class="layer-header-tag">LAYER 3 &bull; DEEP LEARNING MODEL</div>
+              <div class="layer-flex-items">
+                <div class="layer-item-node">MobileNetV3 Feature Net</div>
+                <div class="layer-item-node">Convolution Kernel</div>
+                <div class="layer-item-node">Softmax Classification</div>
+              </div>
+              <div class="layer-tooltip">
+                <h4>AI / Machine Learning Layer</h4>
+                <p>Extracts texture maps and edge gradients. Evaluates weights in the fully connected layer to emit category probability lists.</p>
+              </div>
+            </div>
+
+            <div class="animated-arrow-connector">
+              <svg class="down-arrows" viewBox="0 0 100 40">
+                <path d="M50 0 V30 M45 25 L50 30 L55 25" stroke="#ffaa00" stroke-width="2" fill="none" class="pulse-path"/>
+              </svg>
+            </div>
+
+            <!-- Data Layer -->
+            <div class="arch-layer-card flex-layer" data-layer-id="data">
+              <div class="layer-header-tag">LAYER 4 &bull; DATA &amp; KNOWLEDGE</div>
+              <div class="layer-flex-items">
+                <div class="layer-item-node">WasteNet Datasets</div>
+                <div class="layer-item-node">Disposal Knowledge Base</div>
+                <div class="layer-item-node">Log Registry</div>
+              </div>
+              <div class="layer-tooltip">
+                <h4>Data &amp; Knowledge Layer</h4>
+                <p>Houses training checkpoint indices, global decomposition rates, chemical risk matrices, and local recycling legislation rules.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. AI Processing Pipeline Nodes -->
+        <div class="architecture-container-block mt-48">
+          <h3 class="panel-subtitle-large mb-16">2. Technical Classification Pipeline</h3>
+          <p class="section-body text-left mb-24">The exact steps visual features undergo during an analysis call. Select a node to learn its algorithmic task.</p>
+          
+          <div class="pipeline-scroller">
+            <div class="pipeline-grid" id="pipeline-nodes-container">
+              <!-- Node 1 -->
+              <div class="pipeline-node active-node" data-pipe-id="1">
+                <div class="pipe-num">1</div>
+                <div class="pipe-title">User Image</div>
+                <p class="pipe-summary">Raw client input file.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector animated-con"></div>
+              
+              <!-- Node 2 -->
+              <div class="pipeline-node" data-pipe-id="2">
+                <div class="pipe-num">2</div>
+                <div class="pipe-title">Validation</div>
+                <p class="pipe-summary">Size &amp; mime type filters.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 3 -->
+              <div class="pipeline-node" data-pipe-id="3">
+                <div class="pipe-num">3</div>
+                <div class="pipe-title">Preprocessing</div>
+                <p class="pipe-summary">Normalizing tensor values.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 4 -->
+              <div class="pipeline-node" data-pipe-id="4">
+                <div class="pipe-num">4</div>
+                <div class="pipe-title">Feature Extract</div>
+                <p class="pipe-summary">Finding contour shapes.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 5 -->
+              <div class="pipeline-node" data-pipe-id="5">
+                <div class="pipe-num">5</div>
+                <div class="pipe-title">CNN Stack</div>
+                <p class="pipe-summary">Applying network kernels.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 6 -->
+              <div class="pipeline-node" data-pipe-id="6">
+                <div class="pipe-num">6</div>
+                <div class="pipe-title">Classification</div>
+                <p class="pipe-summary">Softmax output mapping.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 7 -->
+              <div class="pipeline-node" data-pipe-id="7">
+                <div class="pipe-num">7</div>
+                <div class="pipe-title">Rules Engine</div>
+                <p class="pipe-summary">Querying sorting guidelines.</p>
+              </div>
+              <!-- Connector -->
+              <div class="pipe-connector"></div>
+
+              <!-- Node 8 -->
+              <div class="pipeline-node" data-pipe-id="8">
+                <div class="pipe-num">8</div>
+                <div class="pipe-title">AI Report</div>
+                <p class="pipe-summary">Compiling detailed indices.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pipeline Info Pane -->
+          <div class="pipeline-explanation-box mt-24" id="pipeline-info-pane">
+            <h4 class="info-pane-title" id="pane-title">1. User Image Input</h4>
+            <p class="info-pane-desc" id="pane-desc">The workflow begins when a user supplies a static raster image (JPEG, PNG, WEBP) either through direct upload, drag-and-drop actions, or camera device capture hooks in the viewport client.</p>
+          </div>
+        </div>
+
+        <!-- 3. Neural Network Simulation -->
+        <div class="architecture-container-block mt-48">
+          <h3 class="panel-subtitle-large mb-16">3. CNN Layer Visualizer</h3>
+          <p class="section-body text-left mb-24">Interactive demonstration of visual signals propagating through a multi-layered Neural Network. Move your cursor over the canvas area to excite neurons and watch the weights pulse.</p>
+          
+          <div class="nn-canvas-wrapper">
+            <canvas id="nn-visualizer-canvas" width="900" height="340"></canvas>
+            
+            <div class="nn-labels-overlay">
+              <span class="nn-label-text pos-1">Input Pixels</span>
+              <span class="nn-label-text pos-2">Conv Layers</span>
+              <span class="nn-label-text pos-3">Feature Extraction</span>
+              <span class="nn-label-text pos-4">Softmax Class</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ABOUT SECTION -->
+    <section id="tab-about" class="tab-content">
+      <div class="max-width-container min-height-about">
+        <div class="about-grid">
+          <!-- Text Details -->
+          <div class="vertical-center">
+            <div class="hero-badge">EcoSort AI Platform</div>
+            <h2 class="section-title text-left">Empowering Municipalities with Machine Learning</h2>
+            <p class="section-body text-left">
+              EcoSort AI was designed to solve the sorting issues faced by municipal recycling plants and private waste facilities. Every year, millions of tons of recyclable glass, plastic, and metal are buried in landfill basins because materials are polluted or missegregated by consumers.
+            </p>
+            <p class="section-body text-left mt-16">
+              Our neural classifiers provide immediate clarity on material recyclability, pollution risks, and proper disposal sequences, lowering processing overhead and increasing global sorting efficiency.
+            </p>
+            <div class="tech-specs-table mt-24">
+              <div class="table-row">
+                <span class="spec-label">Model Backbone</span>
+                <span class="spec-value">MobileNetV3 (Weights pre-trained on ImageNet)</span>
+              </div>
+              <div class="table-row">
+                <span class="spec-label">Classifier Head</span>
+                <span class="spec-value">6-Class Dense Softmax (Plastic, Paper, Glass, Metal, Organic, E-Waste)</span>
+              </div>
+              <div class="table-row">
+                <span class="spec-label">Training Resolution</span>
+                <span class="spec-value">224 x 224 x 3 Channel Tensor Inputs</span>
+              </div>
+              <div class="table-row">
+                <span class="spec-label">Recommendation Logic</span>
+                <span class="spec-value">Hybrid Rule Engine + Material Density Metrics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credibility Banner -->
+          <div class="about-graphic-panel">
+            <div class="glass-cred-card">
+              <div class="cred-header">
+                <span class="badge badge-emerald">Technical Validation</span>
+                <h3>Disposal vs Classification</h3>
+              </div>
+              <p class="cred-desc">
+                EcoSort AI clearly demarcates **Machine Learning prediction** (estimating physical material confidence score via CNN) from the **Rule-Based recommendation engine** (matching estimated classes with local recycling criteria). This prevents model hallucination in disposal procedures.
+              </p>
+              <div class="cred-footer">
+                <div class="cred-author">WasteNet ML Group</div>
+                <div class="cred-version">Release v1.4.2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="app-footer">
+    <div class="max-width-container footer-flex">
+      <div class="footer-left">
+        <span class="footer-logo">EcoSort <span class="accent-text">AI</span></span>
+        <p class="footer-copy">&copy; 2026 EcoSort AI. All rights reserved. Platform optimized for competition benchmarking.</p>
+      </div>
+      <div class="footer-links">
+        <button class="footer-link-btn" onclick="switchTab('overview')">Overview</button>
+        <button class="footer-link-btn" onclick="switchTab('analyze')">Analyze Waste</button>
+        <button class="footer-link-btn" onclick="switchTab('architecture')">Architecture</button>
+        <button class="footer-link-btn" onclick="switchTab('analytics')">Analytics</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
