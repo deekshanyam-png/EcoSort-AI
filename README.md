@@ -32,7 +32,5 @@ The main objective of EcoSort AI is to explore how Artificial Intelligence can b
 - Connect with a trained machine-learning model
 - Add real-time camera classification
 - Deploy the application online
-
-## 👩‍💻 Project
-
+ Project
 Developed as an AI-based environmental technology project.
